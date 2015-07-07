@@ -1,0 +1,1 @@
+BaseCamp/GameController/cycle_delay = 20

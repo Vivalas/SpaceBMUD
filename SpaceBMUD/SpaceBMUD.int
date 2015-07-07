@@ -1,0 +1,11 @@
+// BEGIN_INTERNALS
+/*
+LAST_COMPILE_TIME: 1436230726
+DIR: Lib 
+AUTO_FILE_DIR: ON
+MAP_ICON_TYPE: 0
+LAST_COMPILE_VERSION: 507.1286
+WINDOW: queue_buffer.dm;player_verbs_basic.dm;ticker.dm;world_defines.dm;world.dm;movement.dm;room_defines.dm;mob_defines.dm
+FILE: movement.dm
+*/
+// END_INTERNALS

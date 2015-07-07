@@ -1,0 +1,44 @@
+//DM Environment file for SpaceBMUD.dme.
+// All manual changes should be made outside the BEGIN_ and END_ blocks.
+// New source code should be placed in .dm files: choose File/New --> Code File.
+
+// BEGIN_INTERNALS
+// END_INTERNALS
+
+// BEGIN_FILE_DIR
+#define FILE_DIR .
+// END_FILE_DIR
+
+// BEGIN_PREFERENCES
+// END_PREFERENCES
+
+// BEGIN_INCLUDE
+#include <alathon\alaparser\Alaparser.dme>
+#include <dan\mud\mud.dme>
+#include <deadron\basecamp\BaseCamp.dme>
+#include <deadron\eventloop\eventloop.dme>
+#include "actions_mob.dm"
+#include "area.dm"
+#include "areas.dm"
+#include "atom_defines.dm"
+#include "examine.dm"
+#include "interaction.dm"
+#include "look.dm"
+#include "mob.dm"
+#include "mob_defines.dm"
+#include "movement.dm"
+#include "object_defines.dm"
+#include "objects_misc.dm"
+#include "parser.dm"
+#include "player_verbs_basic.dm"
+#include "queue_buffer.dm"
+#include "region.dm"
+#include "regions.dm"
+#include "room_defines.dm"
+#include "ticker.dm"
+#include "world.dm"
+#include "world_defines.dm"
+#include "interface.dmf"
+// END_INCLUDE
+
+#define DEBUG
