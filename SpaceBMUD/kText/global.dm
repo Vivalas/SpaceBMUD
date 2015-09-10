@@ -1,0 +1,2 @@
+var
+	kText/kText = new

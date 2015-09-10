@@ -27,8 +27,8 @@ Command
 
 
 mob/proc/TryMove(dir)
-	var/room/target
-	var/room/source = loc
+	var/obj/room/target
+	var/obj/room/source = loc
 	switch(dir)
 		if(NORTH) target = locate(source.north_exit)
 		if(SOUTH) target = locate(source.south_exit)
@@ -37,10 +37,12 @@ mob/proc/TryMove(dir)
 	if(!target)
 		src << "You can't go that way!"
 		return
-	if((dir in source.blocked_exits)||(dir in target.blocked_exits) )
+	if((dir in source.blocked_exits)||(OppositeDirection(dir) in target.blocked_exits) )
 		src << "That way seems to be blocked."
 		return
-
+	if(loc:is_door_blocked(dir))
+		src << "There seems to be a door blocking that way!"
+		return
 	else
 		var/interaction/move/M = new
 		M.doer = src
@@ -50,8 +52,10 @@ mob/proc/TryMove(dir)
 
 interaction
 	move
+		delay = 1
 		_start_()
-
+			var/dir = affecting[1]
+			doer << "You start to move towards the [dir2str(dir)]."
 		_end_()
 			var/mob/M = doer
 			var/dir = affecting[1]
@@ -67,8 +71,26 @@ mob/Move()
 		return 1
 
 
-mob/proc/CanMove(room/target,dir)
-	loc:announce_visual("[src] leaves to the [dir].")
+mob/proc/CanMove(obj/room/target,dir)
+	if(loc:depart_desc.len)
+		var/announced = 0
+		for(var/i in loc:depart_desc)
+			if(loc:depart_desc[i] == dir)
+				var/desc = i
+				loc:announce_visual("[src] [desc]")
+				announced = 1
+		if(!announced) loc:announce_visual("[src] leaves to the [dir].")
+	else loc:announce_visual("[src] leaves to the [dir].")
 	if(src.Move(target))
-		loc:oannounce_visual("[src] arrives from the [dir].")
+		if(target.arrive_desc.len)
+			var/announced = 1
+			for(var/i in target.arrive_desc)
+				if(target.arrive_desc[i] == dir)
+					var/desc = i
+					loc:oannounce_visual("[src] [desc]")
+					announced = 1
+			if(!announced) target.oannounce_visual("[src] arrives from the [OppositeDirectionStr(dir)]")
 
+		else target.oannounce_visual("[src] arrives from the [OppositeDirectionStr(dir)]")
+	else
+		src.loc:announce_visual("[src] is unable to leave the room!")

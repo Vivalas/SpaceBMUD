@@ -1,4 +1,4 @@
-mob/proc/look_surround(var/room/R)
+mob/proc/look_surround(var/obj/room/R)
 
 	var/msg
 	msg += "			[R.name] / \[[R.area]\] (<font color=blue>[R.region]</font>)"
@@ -7,7 +7,7 @@ mob/proc/look_surround(var/room/R)
 	msg += "<BR>[R.desc]<BR>"
 	var/list/object_list = list()
 	for(var/obj/game/item/G in R)
-		if(G.invisibility <= see_invisible)
+		if(G.invisibility <= see_invisible && !G.hidden)
 			object_list += G
 	msg += "<font color=white>[Generate_Object_List(object_list)]</font>"
 
